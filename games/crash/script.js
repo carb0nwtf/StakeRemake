@@ -11,6 +11,7 @@ class CrashGame {
     this.currentBet = 0;
     this.gameHistory = [];
     this.autoCashoutAt = 0;
+    this.growthRate = 1.1678;
     this.won = false;
 
     this.setupCanvas();
@@ -262,10 +263,8 @@ class CrashGame {
     const points = [];
     const elapsed = (performance.now() - this.startTime) / 1000;
     
-    const growthRate = 1.1678;
-    
     for (let i = 0; i <= elapsed; i += 0.05) {
-      const multiplier = Math.pow(growthRate, i);
+      const multiplier = Math.pow(this.growthRate, i);
       const x = (i / 4) * this.canvasWidth;
       const y = ((multiplier - 1) / 2) * this.canvasHeight;
       points.push({ x, y });
@@ -279,7 +278,7 @@ class CrashGame {
     const elapsed = timestamp - this.startTime;
     
     if (this.isPlaying) {
-      this.multiplier = Math.pow(1.1678, elapsed / 1000);
+      this.multiplier = Math.pow(this.growthRate, elapsed / 1000);
       
       if (this.autoCashoutAt > 0 && this.multiplier >= this.autoCashoutAt && this.currentBet > 0) {
         this.cashout();
