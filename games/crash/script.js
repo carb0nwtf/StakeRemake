@@ -127,10 +127,10 @@ class CrashGame {
       const winAmount = this.autoCashoutAt > 0 ? this.currentBet * this.autoCashoutAt : this.currentBet * this.multiplier;
       window.parent.globalBalance += winAmount;
       window.parent.updateGlobalBalanceDisplay();
-      this.currentBet = 0;
       document.getElementById('betButton').textContent = 'Bet';
       document.getElementById('betButton').style.backgroundColor = 'var(--accent-green)';
       this.won = true;
+      this.gamePhase = 'waiting';
     }
   }
 
@@ -144,7 +144,6 @@ class CrashGame {
       this.multiplier = 1.00;
       document.getElementById('betButton').textContent = 'Bet';
       document.getElementById('betButton').style.backgroundColor = 'var(--accent-green)';
-      this.updateDisplay();
       this.resetGame();
     }, 2000);
   }
