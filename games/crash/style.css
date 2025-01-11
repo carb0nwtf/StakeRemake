@@ -1,0 +1,157 @@
+:root {
+  --bg-dark: #1a2127;
+  --bg-darker: #141722;
+  --text-color: #fff;
+  --accent-green: #00ff4c;
+  --button-bg: #2c3142;
+  --input-bg: #1e2230;
+  --border-color: #2a2f42;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  background-color: var(--bg-dark);
+  color: var(--text-color);
+  min-height: 100vh;
+}
+
+.game-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 20px;
+  height: 100vh;
+}
+
+.game-controls {
+  background-color: var(--bg-darker);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.bet-input, .cashout-input {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  color: #8a8d96;
+}
+
+.input-group {
+  display: flex;
+  gap: 4px;
+}
+
+input {
+  flex: 1;
+  background-color: var(--input-bg);
+  border: 1px solid var(--border-color);
+  color: var(--text-color);
+  padding: 8px;
+  border-radius: 4px;
+}
+
+.quick-buttons, .input-controls {
+  display: flex;
+  gap: 4px;
+}
+
+.quick-buttons button, .input-controls button {
+  background-color: var(--button-bg);
+  border: none;
+  color: var(--text-color);
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.bet-button {
+  width: 100%;
+  padding: 12px;
+  background-color: var(--accent-green);
+  border: none;
+  color: var(--bg-dark);
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.game-graph {
+  background-color: var(--bg-darker);
+  border-radius: 8px;
+  padding: 20px;
+  position: relative;
+}
+
+#gameCanvas {
+  width: 100%;
+  height: 100%;
+}
+
+.multiplier-display {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 48px;
+  font-weight: bold;
+}
+
+.time-markers {
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-around;
+  color: #8a8d96;
+}
+
+.recent-multipliers {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  gap: 8px;
+}
+
+.multiplier {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+.multiplier.green {
+  background-color: var(--accent-green);
+  color: var(--bg-dark);
+}
+
+.multiplier.gray {
+  background-color: var(--button-bg);
+}
+
+.bottom-nav {
+  display: none;
+}
+
+.auto-cashout {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.auto-cashout input {
+  margin-left: 8px;
+  width: 60px;
+}

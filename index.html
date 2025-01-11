@@ -1,0 +1,68 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Game Grid</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      .balance {
+        display: flex;
+        align-items: center;
+      }
+      .svg-icon {
+        margin-left: 4px;
+      }
+      iframe {
+        width: 100%;
+        height: 80vh;
+        border: none;
+        margin-top: 20px;
+        display: none;
+      }
+    </style>
+    <script type="module" src="main.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <div class="header-left">
+        <h1 id="originalsText" style="cursor: pointer;">Originals</h1>
+      </div>
+      <div class="header-center">
+        <div class="balance">1000.00 
+          <span class="weight-normal line-height-default align-left size-default text-size-default variant-subtle is-truncate svelte-17v69ua" title="gold" style="max-width: 16ch;">
+            <svg fill="none" viewBox="0 0 96 96" class="svg-icon" style="width: 10px; height: 10px;">
+              <title></title>
+              <path d="M48 96c26.51 0 48-21.49 48-48S74.51 0 48 0 0 21.49 0 48s21.49 48 48 48Z" fill="#FFC800"></path>
+              <path d="M48.16 21.92c10.16 0 16.56 4.92 20.32 10.72l-8.68 4.72c-2.28-3.44-6.48-6.16-11.64-6.16-8.88 0-15.36 6.84-15.36 16.12 0 9.28 6.48 16.12 15.36 16.12 4.48 0 8.44-1.84 10.6-3.76v-5.96H45.68v-8.96h23.4v18.76c-5 5.6-12 9.28-20.88 9.28-14.32 0-26.12-10-26.12-25.44C22.08 31.92 33.84 22 48.2 22l-.04-.08Z" fill="#473800"></path>
+            </svg>
+          </span>
+        </div>
+        <button class="wallet-btn">Wallet</button>
+      </div>
+    </header>
+
+    <div class="search-container" id="searchContainer">
+      <input type="text" placeholder="Search your game" class="search-input" />
+    </div>
+
+    <div class="controls" id="controls">
+      <button class="view-all">View All Providers</button>
+      <div class="sort">
+        <span>Sort By</span>
+        <select>
+          <option>Popular</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="game-grid" id="gameGrid"></div>
+
+    <div class="results-count" id="resultsCount">
+      Displaying <span id="gameCount">0</span> of <span id="totalGames">0</span> games
+    </div>
+
+    <iframe id="gameIframe" src=""></iframe>
+
+    <script type="module" src="main.js"></script>
+  </body>
+</html>
