@@ -80,7 +80,8 @@ class CrashGame {
 
   updateProfitDisplay(betAmount) {
     const cashoutAt = parseFloat(document.getElementById('cashoutAt').value);
-    const profit = betAmount * (cashoutAt - 1);
+    let profit = betAmount * (cashoutAt - 1);
+    if (profit < 0) profit = 0;
     document.querySelector('.profit-amount').textContent = '$' + profit.toFixed(2);
   }
 
@@ -123,7 +124,7 @@ class CrashGame {
 
   cashout() {
     if (this.gamePhase === 'playing') {
-      const winAmount = this.currentBet * this.multiplier;
+      const winAmount = this.autoCashoutAt > 0 ? this.currentBet * this.autoCashoutAt : this.currentBet * this.multiplier;
       window.parent.globalBalance += winAmount;
       window.parent.updateGlobalBalanceDisplay();
       this.currentBet = 0;
