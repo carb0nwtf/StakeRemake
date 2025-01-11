@@ -65,32 +65,15 @@ header {
 }
 
 .controls {
-  display: flex;
-  justify-content: space-between;
-  margin: 20px 0;
+  display: none;
 }
 
 .view-all {
-  background: var(--card-bg);
-  border: none;
-  color: var(--text);
-  padding: 8px 20px;
-  border-radius: 20px;
-  cursor: pointer;
+  display: none;
 }
 
 .sort {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.sort select {
-  background: var(--card-bg);
-  color: var(--text);
-  border: none;
-  padding: 8px 15px;
-  border-radius: 20px;
+  display: none;
 }
 
 .game-grid {
