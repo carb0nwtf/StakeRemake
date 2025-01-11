@@ -222,6 +222,13 @@ class CrashGame {
     this.ctx.lineWidth = 3;
     
     const points = this.calculateGraphPoints();
+    const maxX = points[points.length - 1].x;
+    const maxY = points.reduce((max, point) => Math.max(max, point.y), 0);
+    const translateX = Math.max(0, maxX - this.canvasWidth);
+    const translateY = Math.max(0, maxY - this.canvasHeight);
+
+    this.ctx.translate(-translateX, -translateY);
+
     points.forEach((point, index) => {
       if (index === 0) {
         this.ctx.moveTo(point.x, point.y);
@@ -262,14 +269,15 @@ class CrashGame {
   calculateGraphPoints() {
     const points = [];
     const elapsed = (performance.now() - this.startTime) / 1000;
-    
-    for (let i = 0; i <= elapsed; i += 0.05) {
-      const multiplier = Math.pow(this.growthRate, i);
-      const x = (i / 4) * this.canvasWidth;
-      const y = ((multiplier - 1) / 2) * this.canvasHeight;
+    let lastX = 0;
+
+    for (let t = 0; t <= elapsed; t += 0.01) {
+      const x = t * 150;
+      const y = Math.pow(this.growthRate, t) * 100;
       points.push({ x, y });
+      lastX = x;
     }
-    
+
     return points;
   }
 
