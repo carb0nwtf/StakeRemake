@@ -136,6 +136,7 @@ class CrashGame {
 
   cashout() {
     if (this.gamePhase === 'playing') {
+      this.autoCashoutAt = 0;
       const winAmount = this.autoCashoutAt > 0 ? this.currentBet * this.autoCashoutAt : this.currentBet * this.multiplier;
       window.parent.globalBalance += winAmount;
       window.parent.updateGlobalBalanceDisplay();
