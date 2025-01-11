@@ -16,6 +16,7 @@ class CrashGame {
     this.setupCanvas();
     this.setupEventListeners();
     this.updateDisplay();
+    document.addEventListener('visibilitychange', () => this.handleVisibilityChange());
   }
 
   setupCanvas() {
@@ -40,7 +41,10 @@ class CrashGame {
       this.updateProfitDisplay(parseFloat(e.target.value) || 0);
     });
 
-    cashoutAt.addEventListener('input', (e) => {
+    cashoutAt.addEventListener('blur', (e) => {
+      let value = parseFloat(e.target.value);
+      if (value < 1.01 && value !== 0) value = 1.01;
+      e.target.value = value.toFixed(2);
       this.updateProfitDisplay(parseFloat(betAmount.value) || 0);
     });
 
@@ -59,11 +63,19 @@ class CrashGame {
 
     arrowButtons.forEach(button => {
       button.addEventListener('click', () => {
-        const currentValue = parseFloat(cashoutAt.value) || 1.01;
+        let currentValue = parseFloat(cashoutAt.value) || 1.01;
         if (button.textContent === '▼') {
-          cashoutAt.value = Math.max(1.01, (currentValue - 0.01)).toFixed(2);
+          if (currentValue === 1.01) {
+            cashoutAt.value = 0;
+          } else {
+            cashoutAt.value = Math.max(1.01, (currentValue - 0.01)).toFixed(2);
+          }
         } else {
-          cashoutAt.value = (currentValue + 0.01).toFixed(2);
+          if (currentValue === 0) {
+            cashoutAt.value = 1.01;
+          } else {
+            cashoutAt.value = (currentValue + 0.01).toFixed(2);
+          }
         }
         this.autoCashoutAt = parseFloat(cashoutAt.value) || 0;
         this.updateProfitDisplay(parseFloat(betAmount.value) || 0);
@@ -130,7 +142,7 @@ class CrashGame {
       document.getElementById('betButton').textContent = 'Bet';
       document.getElementById('betButton').style.backgroundColor = 'var(--accent-green)';
       this.won = true;
-      this.gamePhase = 'waiting';
+      this.currentBet = 0;
     }
   }
 
@@ -190,8 +202,6 @@ class CrashGame {
   updateDisplay() {
     const multiplierDisplay = document.querySelector('.multiplier-display');
     multiplierDisplay.textContent = this.multiplier.toFixed(2) + '×';
-    
-    this.updateProfitDisplay(this.currentBet);
     
     this.updateTimeMarkers();
   }
@@ -267,8 +277,6 @@ class CrashGame {
     if (!this.lastTimestamp) this.lastTimestamp = timestamp;
     const elapsed = timestamp - this.startTime;
     
-    this.updateProfitDisplay(this.currentBet);
-
     if (this.isPlaying) {
       this.multiplier = Math.pow(1.1678, elapsed / 1000);
       
@@ -283,6 +291,29 @@ class CrashGame {
         this.drawGraph();
         requestAnimationFrame((ts) => this.animate(ts));
       }
+    }
+  }
+
+  handleVisibilityChange() {
+    if (document.hidden) {
+      this.pauseGame();
+    } else {
+      this.resumeGame();
+    }
+  }
+
+  pauseGame() {
+    if (this.gamePhase === 'playing') {
+      this.isPlaying = false;
+      this.lastTimestamp = performance.now();
+    }
+  }
+
+  resumeGame() {
+    if (this.gamePhase === 'playing') {
+      this.isPlaying = true;
+      this.startTime += performance.now() - this.lastTimestamp;
+      this.animate();
     }
   }
 }
