@@ -12,38 +12,47 @@ class CrashGame {
     this.gameHistory = [];
     this.autoCashoutAt = 0;
     this.growthRate = 1.1678;
+
     this.won = false;
 
     this.setupCanvas();
     this.setupEventListeners();
     this.updateDisplay();
+
     document.addEventListener('visibilitychange', () => this.handleVisibilityChange());
   }
+
+
 
   setupCanvas() {
     this.canvas.width = this.canvas.offsetWidth * window.devicePixelRatio;
     this.canvas.height = this.canvas.offsetHeight * window.devicePixelRatio;
+
     this.ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
-    
     this.canvasWidth = this.canvas.width / window.devicePixelRatio;
+
     this.canvasHeight = this.canvas.height / window.devicePixelRatio;
   }
+
+
 
   setupEventListeners() {
     const betButton = document.getElementById('betButton');
     const betAmount = document.getElementById('betAmount');
+
     const cashoutAt = document.getElementById('cashoutAt');
     const quickButtons = document.querySelectorAll('.quick-buttons button');
     const arrowButtons = document.querySelectorAll('.input-controls button');
 
     betButton.addEventListener('click', () => this.toggleBet());
-    
+
     betAmount.addEventListener('input', (e) => {
       this.updateProfitDisplay(parseFloat(e.target.value) || 0);
     });
 
     cashoutAt.addEventListener('blur', (e) => {
       let value = parseFloat(e.target.value);
+
       if (value < 1.01 && value !== 0) value = 1.01;
       e.target.value = value.toFixed(2);
       this.updateProfitDisplay(parseFloat(betAmount.value) || 0);
@@ -56,8 +65,11 @@ class CrashGame {
           betAmount.value = (currentBet / 2).toFixed(2);
         } else {
           const newBet = currentBet * 2;
+
           betAmount.value = (newBet > window.parent.globalBalance ? window.parent.globalBalance.toFixed(2) : newBet.toFixed(2));
+
         }
+
         this.updateProfitDisplay(parseFloat(betAmount.value));
       });
     });
@@ -65,6 +77,7 @@ class CrashGame {
     arrowButtons.forEach(button => {
       button.addEventListener('click', () => {
         let currentValue = parseFloat(cashoutAt.value) || 1.01;
+
         if (button.textContent === '▼') {
           if (currentValue === 1.01) {
             cashoutAt.value = 0;
@@ -78,6 +91,7 @@ class CrashGame {
             cashoutAt.value = (currentValue + 0.01).toFixed(2);
           }
         }
+
         this.autoCashoutAt = parseFloat(cashoutAt.value) || 0;
         this.updateProfitDisplay(parseFloat(betAmount.value) || 0);
       });
@@ -85,6 +99,7 @@ class CrashGame {
 
     cashoutAt.addEventListener('input', (e) => {
       this.autoCashoutAt = parseFloat(e.target.value) || 0;
+
       this.updateProfitDisplay(parseFloat(betAmount.value) || 0);
     });
 
@@ -99,12 +114,14 @@ class CrashGame {
   }
 
   toggleBet() {
+
     if (this.gamePhase === 'waiting') {
       const betAmount = parseFloat(document.getElementById('betAmount').value);
       const cashoutAt = parseFloat(document.getElementById('cashoutAt').value);
       
-      if (betAmount <= 0 || betAmount > window.parent.globalBalance) {
+      if (isNaN(betAmount) || betAmount <= 0 || betAmount > window.parent.globalBalance) {
         alert('Invalid bet amount!');
+
         return;
       }
 
@@ -113,6 +130,7 @@ class CrashGame {
       window.parent.globalBalance -= betAmount;
       window.parent.updateGlobalBalanceDisplay();
       this.startGame();
+
       document.getElementById('betButton').textContent = 'Cashout';
       document.getElementById('betButton').style.backgroundColor = '#ff4444';
     } else if (this.gamePhase === 'playing') {
@@ -120,14 +138,17 @@ class CrashGame {
     }
   }
 
+
   startGame() {
     this.gamePhase = 'playing';
     this.isPlaying = true;
     this.multiplier = 1.00;
     this.startTime = performance.now();
     this.crashPoint = this.generateCrashPoint();
+
     this.animate();
   }
+
 
   generateCrashPoint() {
     const r = Math.random();
@@ -140,6 +161,7 @@ class CrashGame {
       this.autoCashoutAt = 0;
       const winAmount = this.autoCashoutAt > 0 ? this.currentBet * this.autoCashoutAt : this.currentBet * this.multiplier;
       window.parent.globalBalance += winAmount;
+
       window.parent.updateGlobalBalanceDisplay();
       document.getElementById('betButton').textContent = 'Bet';
       document.getElementById('betButton').style.backgroundColor = 'var(--accent-green)';
@@ -167,6 +189,7 @@ class CrashGame {
     this.startTime = 0;
     this.lastTimestamp = 0;
     this.gamePhase = 'waiting';
+
     this.won = false;
   }
 
@@ -192,6 +215,7 @@ class CrashGame {
 
     for (let i = 2; i <= elapsed + 2; i += 2) {
       markers.push(`<span>${i}s</span>`);
+
     }
 
     if (markers.length > maxMarkers) {
@@ -210,7 +234,6 @@ class CrashGame {
 
   drawGraph() {
     this.ctx.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
-    
     this.ctx.save();
     this.ctx.translate(0, this.canvasHeight);
     this.ctx.scale(1, -1);
@@ -220,8 +243,9 @@ class CrashGame {
     this.ctx.beginPath();
     this.ctx.strokeStyle = '#00ff4c';
     this.ctx.lineWidth = 3;
-    
+
     const points = this.calculateGraphPoints();
+
     const maxX = points[points.length - 1].x;
     const maxY = points.reduce((max, point) => Math.max(max, point.y), 0);
     const translateX = Math.max(0, maxX - this.canvasWidth);
@@ -238,9 +262,9 @@ class CrashGame {
     });
     
     this.ctx.stroke();
-
     this.ctx.lineTo(points[points.length - 1].x, 0);
     this.ctx.lineTo(points[0].x, 0);
+
     this.ctx.fillStyle = 'rgba(0, 255, 76, 0.1)';
     this.ctx.fill();
     
@@ -266,6 +290,7 @@ class CrashGame {
     }
   }
 
+
   calculateGraphPoints() {
     const points = [];
     const elapsed = (performance.now() - this.startTime) / 1000;
@@ -274,6 +299,7 @@ class CrashGame {
     for (let t = 0; t <= elapsed; t += 0.01) {
       const x = t * 150;
       const y = Math.pow(this.growthRate, t) * 100;
+
       points.push({ x, y });
       lastX = x;
     }
@@ -287,7 +313,7 @@ class CrashGame {
     
     if (this.isPlaying) {
       this.multiplier = Math.pow(this.growthRate, elapsed / 1000);
-      
+
       if (this.autoCashoutAt > 0 && this.multiplier >= this.autoCashoutAt && this.currentBet > 0) {
         this.cashout();
       }
