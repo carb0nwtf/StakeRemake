@@ -227,8 +227,11 @@ class CrashGame {
 
   updateDisplay() {
     const multiplierDisplay = document.querySelector('.multiplier-display');
-    multiplierDisplay.textContent = this.multiplier.toFixed(2) + '×';
-    
+    if (!isNaN(this.multiplier)) {
+      multiplierDisplay.textContent = this.multiplier.toFixed(2) + '×';
+    } else {
+      multiplierDisplay.textContent = '1.00×';
+    }
     this.updateTimeMarkers();
   }
 
