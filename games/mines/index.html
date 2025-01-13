@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+        </header>
+        <main>
+            <section id="game-grid" class=""grid>
+                <script>
+                    for (let i = 0; i < 25; i++) {
+                        document.write('<button class="tile"></button>');
+                    }
+                </script>
+            </section>
+            <aside class="controls">
+                <div class="control-group">
+                    <label for="betAmount">Bet Amount</label>
+                    <div class="input-group">
+                        <input type="number" id="betAmount" value="5" min="1" step="0.01">
+                        <div class="quick-buttons">
+                            <button onclick="adjustBet(0.5)">½</button>
+                            <button onclick="adjustBet(2)">2×</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label for="mineCount">Number of Mines</label>
+                    <select id="mineCount">
+                        <script>
+                            for (let i = 1; i <= 24; i++) {
+                                document.write(`<option value="${i}" ${i === 3 ? 'selected' : ''}>${i} Mines</option>`);
+                            }
+                        </script>
+                    </select>
+                </div>
+                <button id="playButton" onclick="startGame()">Bet</button>
+                <button id="cashoutButton" onclick="cashout()" disabled>Cashout</button>
+            </aside>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

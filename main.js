@@ -1,7 +1,7 @@
 const games = [
   // { id: 1, title: 'PLINKO', players: 0, image: 'icons/image_1.jpg' },
   // { id: 2, title: 'BLACKJACK', players: 0, image: 'icons/image_2.jpg' },
-  // { id: 3, title: 'MINES', players: 0, image: 'icons/image_3.jpg' },
+  { id: 3, title: 'MINES', players: 0, image: 'icons/image_3.jpg' },
   // { id: 4, title: 'DICE', players: 0, image: 'icons/image_4.jpg' },
   { id: 5, title: 'CRASH', players: 0, image: 'icons/image_5.jpg' },
   // { id: 6, title: 'KENO', players: 0, image: 'icons/image_6.jpg' },
