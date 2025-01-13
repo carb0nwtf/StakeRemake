@@ -32,20 +32,17 @@ function createGameCard(game) {
 
 function switchGame(gameName) {
   const gameGrid = document.getElementById('gameGrid');
-  gameGrid.style.display = 'none';
-  
   const iframe = document.getElementById('gameIframe');
-  iframe.src = `games/${gameName}/index.html`;
-  iframe.style.display = 'block';
-  
   const resultsCount = document.getElementById('resultsCount');
-  resultsCount.style.display = 'none';
-
   const searchContainer = document.getElementById('searchContainer');
-  searchContainer.style.display = 'none';
 
-  const controls = document.getElementById('controls');
-  controls.style.display = 'none';
+  if (gameGrid) gameGrid.style.display = 'none';
+  if (iframe) {
+    iframe.src = `games/${gameName}/index.html`;
+    iframe.style.display = 'block';
+  }
+  if (resultsCount) resultsCount.style.display = 'none';
+  if (searchContainer) searchContainer.style.display = 'none';
 }
 
 window.switchGame = switchGame;
@@ -87,19 +84,14 @@ searchInput.addEventListener('input', (e) => {
 
 document.getElementById('originalsText').addEventListener('click', () => {
   const gameGrid = document.getElementById('gameGrid');
-  gameGrid.style.display = 'grid';
-  
   const iframe = document.getElementById('gameIframe');
-  iframe.style.display = 'none';
-  
   const resultsCount = document.getElementById('resultsCount');
-  resultsCount.style.display = 'block';
-
   const searchContainer = document.getElementById('searchContainer');
-  searchContainer.style.display = 'block';
 
-  const controls = document.getElementById('controls');
-  controls.style.display = 'flex';
+  if (gameGrid) gameGrid.style.display = 'grid';
+  if (iframe) iframe.style.display = 'none';
+  if (resultsCount) resultsCount.style.display = 'block';
+  if (searchContainer) searchContainer.style.display = 'block';
   
   initializeGrid();
 });
