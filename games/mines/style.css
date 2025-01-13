@@ -18,11 +18,11 @@ body {
     background-color: var(--bg-dark);
     color: var(--text-color);
     margin: 0;
-    padding: 2%;
+    padding: 20px;
 }
 
 .container {
-    max-width: 100%;
+    max-width: 1200/2560%;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -34,34 +34,34 @@ header {
 }
 
 header h1 {
-    font-size: 2.67%;
-    margin-bottom: 0.83%;
+    font-size: 32px;
+    margin-bottom: 10px;
 }
 
 header p {
-    font-size: 1.5%;
+    font-size: 18px;
 }
 
 main {
     display: flex;
-    gap: 3.33%;
+    gap: 40px;
     flex-direction: row-reverse;
 }
 
 .grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    gap: 0.83%;
+    gap: 10px;
 }
 
 .grid button {
-    width: 12.5%;
-    height: 12.5%;
+    width: 150/2560%;
+    height: 150/2560%;
     background-color: var(--bg-darker);
-    border: 0.17% solid var(--border-color);
-    border-radius: 0.83%;
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
     color: var(--text-color);
-    font-size: 2%;
+    font-size: 24px;
     font-weight: bold;
     display: flex;
     align-items: center;
@@ -81,77 +81,77 @@ main {
 .grid button.revealed-mine {
     background-color: #dc3545;
     color: var(--text-color);
-    font-size: 5.33%;
+    font-size: 64px;
 }
 
 .grid button span {
-    font-size: 1.83%;
+    font-size: 22px;
     font-weight: bold;
 }
 
 .controls {
     display: flex;
     flex-direction: column;
-    gap: 1.67%;
-    padding: 2%;
+    gap: 20px;
+    padding: 20px;
     background-color: var(--bg-darker);
-    border-radius: 0.67%;
-    width: 25%;
+    border-radius: 8px;
+    width: 300/2560%;
 }
 
 .control-group {
     display: flex;
     flex-direction: column;
-    gap: 0.42%;
-    margin-bottom: 1.67%;
+    gap: 5px;
+    margin-bottom: 20px;
 }
 
 .control-group label {
-    font-size: 1.33%;
+    font-size: 16px;
     font-weight: normal;
     display: block;
-    margin-bottom: 0.67%;
+    margin-bottom: 8px;
     color: #8a8d96;
 }
 
 .input-group {
     display: flex;
-    gap: 0.33%;
+    gap: 4px;
 }
 
 input, select {
     flex: 1;
     background-color: var(--input-bg);
-    border: 0.08% solid var(--border-color);
+    border: 1px solid var(--border-color);
     color: var(--text-color);
-    padding: 0.67%;
-    border-radius: 0.33%;
+    padding: 8px;
+    border-radius: 4px;
 }
 
 .quick-buttons {
     display: flex;
-    gap: 0.33%;
+    gap: 4px;
 }
 
 .quick-buttons button {
     background-color: var(--button-bg);
     border: none;
     color: var(--text-color);
-    padding: 0.67% 1%;
-    border-radius: 0.33%;
+    padding: 8px 12px;
+    border-radius: 4px;
     cursor: pointer;
 }
 
 #playButton, #cashoutButton {
     width: 100%;
-    padding: 1%;
+    padding: 12px;
     background-color: var(--accent-green);
     border: none;
     color: var(--bg-dark);
     font-weight: bold;
-    border-radius: 0.33%;
+    border-radius: 4px;
     cursor: pointer;
-    margin-top: 0.83%;
+    margin-top: 10px;
 }
 
 #playButton:disabled, #cashoutButton:disabled {
@@ -165,11 +165,11 @@ input, select {
 }
 
 button {
-    padding: 0.83%;
-    font-size: 1.33%;
+    padding: 10px;
+    font-size: 16px;
     background-color: var(--accent-green);
     border: none;
-    border-radius: 0.42%;
+    border-radius: 5px;
     color: var(--bg-dark);
     cursor: pointer;
 }
@@ -180,20 +180,20 @@ button:disabled {
 }
 
 select {
-    padding: 0.83%;
-    font-size: 1.33%;
+    padding: 10px;
+    font-size: 16px;
     background-color: var(--input-bg);
     color: var(--text-color);
-    border: 0.08% solid var(--border-color);
-    border-radius: 0.42%;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
 }
 
 .tile {
     background-color: var(--bg-darker);
-    border: 0.17% solid var(--border-color);
-    border-radius: 0.83%;
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
     color: var(--text-color);
-    font-size: 2%;
+    font-size: 24px;
     font-weight: bold;
     display: flex;
     align-items: center;
@@ -213,5 +213,5 @@ select {
 .tile.revealed-mine {
     background-color: #dc3545;
     color: var(--text-color);
-    font-size: 4%;
+    font-size: 48px;
 }
