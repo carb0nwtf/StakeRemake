@@ -22,7 +22,7 @@ body {
 }
 
 .container {
-    max-width: 1200/2560%;
+    max-width: 1200px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -52,11 +52,12 @@ main {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 10px;
+    width: 600px;
 }
 
 .grid button {
-    width: 150/2560%;
-    height: 150/2560%;
+    width: 100px;
+    height: 100px;
     background-color: var(--bg-darker);
     border: 2px solid var(--border-color);
     border-radius: 10px;
@@ -96,7 +97,7 @@ main {
     padding: 20px;
     background-color: var(--bg-darker);
     border-radius: 8px;
-    width: 300/2560%;
+    width: 300px;
 }
 
 .control-group {
