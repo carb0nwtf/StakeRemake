@@ -37,7 +37,8 @@ body {
   padding: 20px;
 }
 
-.bet-input, .cashout-input {
+.bet-input,
+.cashout-input {
   margin-bottom: 20px;
 }
 
@@ -61,12 +62,14 @@ input {
   border-radius: 4px;
 }
 
-.quick-buttons, .input-controls {
+.quick-buttons,
+.input-controls {
   display: flex;
   gap: 4px;
 }
 
-.quick-buttons button, .input-controls button {
+.quick-buttons button,
+.input-controls button {
   background-color: var(--button-bg);
   border: none;
   color: var(--text-color);
